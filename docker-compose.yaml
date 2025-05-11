@@ -1,0 +1,36 @@
+services:
+  backend:
+    image: example-backend
+    pull_policy: never
+    container_name: example-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
+    networks:
+      - backend-network
+
+  database:
+    image: example-postgres-database
+    pull_policy: never
+    container_name: example-postgres-database
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    volumes:
+      - example-postgres-data:/var/lib/postgresql/data
+    env_file:
+      - ./database/config.env
+    ports:
+      - 5432:5432
+    networks:
+      - backend-network
+
+volumes:
+  example-postgres-data:
+
+networks:
+  backend-network:
