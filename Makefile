@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 setup:
-	@./scripts/build-db-image.sh
+	@./scripts/docker/build-db-image.sh
 
 env:
 	@./scripts/build-environment.sh
