@@ -2,4 +2,4 @@
 
 cd ./database
 
-docker build -t backend-database .
+docker build -t example-postgres-database .
