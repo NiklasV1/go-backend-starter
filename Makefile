@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 
-setup:
-	@./scripts/build-environment.sh
-	@./scripts/docker/build-db-image.sh
+.PHONY:setup env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create
+
+setup: env db/build
 
 env:
 	@./scripts/build-environment.sh
@@ -12,6 +12,9 @@ db/up:
 
 db/down:
 	@./scripts/docker/database-down.sh
+
+db/build:
+	@./scripts/docker/build-db-image.sh
 
 db/remove:
 	@./scripts/docker/database-remove.sh
