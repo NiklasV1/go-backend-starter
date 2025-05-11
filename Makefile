@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := start
 
-.PHONY:setup env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create format lint build clean start
+.PHONY:setup generate/env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create format lint build clean start
 
 format:
 	cd ./backend && go fmt ./...
@@ -19,10 +19,13 @@ start: build
 clean:
 	cd ./backend && go clean
 
-setup: env db/build
+setup: generate/env db/build
 
-env:
+generate/env:
 	@./scripts/build-environment.sh
+
+generate/repositories:
+	cd ./backend && sqlc generate
 	
 db/build:
 	cd ./database && docker build -t example-postgres-database .
