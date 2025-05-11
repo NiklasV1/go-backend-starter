@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	customerService "example-backend/internal/customer/service"
+	"example-backend/internal/customer"
 	"example-backend/internal/repository"
 	"log"
 	"os"
@@ -30,7 +30,7 @@ func main() {
 	// Create repository instance
 	repository := repository.New(conn)
 
-	customerService := customerService.New(repository)
+	customerService := customer.NewCustomerService(repository)
 
-	customerService.Create(ctx, "Test", "Person", "Street 3", "testerman", []byte("password"))
+	customerService.Create(ctx, "Test", "Person", "Street 3", "testman", []byte("password"))
 }
