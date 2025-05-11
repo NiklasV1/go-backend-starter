@@ -14,10 +14,10 @@ db/down:
 	docker compose down database
 
 db/migrations/up:
-	@cd ./database && ${GOPATH}/bin/goose up -env ./config.env
+	@./scripts/goose/migrations-up.sh
 
 db/migrations/down:
-	@cd ./database && ${GOPATH}/bin/goose down -env ./config.env
+	@./scripts/goose/migrations-down.sh
 
 db/migrations/create:
-	@./scripts/goose-migrations-create.sh
+	@./scripts/goose/migrations-create.sh
