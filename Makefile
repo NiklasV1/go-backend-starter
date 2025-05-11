@@ -7,17 +7,17 @@ setup: env db/build
 env:
 	@./scripts/build-environment.sh
 	
-db/up:
-	@./scripts/docker/database-up.sh
+db/build:
+	cd ./database && docker build -t example-postgres-database .
+
+db/up: db/build
+	docker compose up database -d
 
 db/down:
-	@./scripts/docker/database-down.sh
-
-db/build:
-	@./scripts/docker/build-db-image.sh
+	docker compose down database
 
 db/remove:
-	@./scripts/docker/database-remove.sh
+	docker compose down database -v
 
 db/migrations/up:
 	@./scripts/goose/migrations-up.sh
