@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 
-DEFAULT_GOAL := build
+DEFAULT_GOAL := start
 
-.PHONY:setup env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create
+.PHONY:setup env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create format lint build clean start
 
 format:
 	cd ./backend && go fmt ./...
@@ -12,6 +12,9 @@ lint: format
 
 build: lint
 	cd ./backend && go build -o example-backend ./main.go
+
+start: build
+	./backend/example-backend
 
 clean:
 	cd ./backend && go clean
