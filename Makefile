@@ -5,16 +5,16 @@ DEFAULT_GOAL := build
 .PHONY:setup env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create
 
 format:
-	go fmt ./backend/...
+	cd ./backend && go fmt ./...
 
 lint: format
-	go vet ./backend/...
+	cd ./backend && go vet ./...
 
 build: lint
-	go build -o example-backend ./backend/main.go
+	cd ./backend && go build -o example-backend ./main.go
 
 clean:
-	go clean
+	cd ./backend && go clean
 
 setup: env db/build
 
