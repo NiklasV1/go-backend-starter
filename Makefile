@@ -2,9 +2,12 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := start
 
-.PHONY:setup generate/env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create format lint build clean start
+.PHONY:setup generate/env generate/repositories db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create format lint build clean start update
 
-format:
+update:
+	cd ./backend && go mod tidy
+
+format: update
 	cd ./backend && go fmt ./...
 
 lint: format
