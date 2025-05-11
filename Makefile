@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 setup:
 	./scripts/build-db-image.sh
 
@@ -12,6 +14,15 @@ db/down:
 	docker compose down database
 
 db/migrations/up:
+	cd ./database
+	${GOPATH}/bin/goose up -env ./config.env
+
 db/migrations/down:
+	cd ./database
+	${GOPATH}/bin/goose down -env ./config.env
+
 db/migrations/create:
-	./scripts/goose-migration-create.sh
+	echo "Please enter a name for the new migration:"
+	read migration_name
+	cd ./database
+	${GOPATH}/bin/goose create ${migration_name} sql -env ./config.env
