@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-DEFAULT_GOAL := start
+.DEFAULT_GOAL := start
 
 .PHONY:setup env db/up db/down db/build db/remove db/migrations/up db/migrations/down db/migrations/create format lint build clean start
 
