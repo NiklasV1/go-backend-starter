@@ -15,14 +15,14 @@ db/down:
 
 db/migrations/up:
 	cd ./database
-	${GOPATH}/bin/goose up -env ./config.env
+	${GOPATH}/bin/goose up -env ./database/config.env
 
 db/migrations/down:
 	cd ./database
-	${GOPATH}/bin/goose down -env ./config.env
+	${GOPATH}/bin/goose down -env ./database/config.env
 
 db/migrations/create:
 	echo "Please enter a name for the new migration:"
 	read migration_name
 	cd ./database
-	${GOPATH}/bin/goose create ${migration_name} sql -env ./config.env
+	${GOPATH}/bin/goose create ${migration_name} sql -env ./database/config.env
