@@ -1,17 +1,17 @@
 SHELL := /bin/bash
 
 setup:
+	@./scripts/build-environment.sh
 	@./scripts/docker/build-db-image.sh
 
 env:
 	@./scripts/build-environment.sh
 	
 db/up:
-	docker compose build database
-	docker compose up database -d
+	@./scripts/docker/database-up.sh
 
 db/down:
-	docker compose down database
+	@./scripts/docker/database-down.sh
 
 db/migrations/up:
 	@./scripts/goose/migrations-up.sh
