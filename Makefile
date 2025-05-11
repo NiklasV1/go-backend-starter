@@ -14,4 +14,4 @@ db/down:
 db/migrations/up:
 db/migrations/down:
 db/migrations/create:
-	${GOPATH}/bin/goose
+	./scripts/goose-migration-create.sh
