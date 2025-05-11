@@ -2,7 +2,8 @@ package main
 
 import (
 	"context"
-	"fmt"
+	customerService "example-backend/internal/customer/service"
+	"example-backend/internal/repository"
 	"log"
 	"os"
 
@@ -11,8 +12,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello world")
-
 	// Load env file
 	err := godotenv.Load("./backend/config.env")
 	if err != nil {
@@ -28,4 +27,10 @@ func main() {
 	}
 	defer conn.Close(ctx)
 
+	// Create repository instance
+	repository := repository.New(conn)
+
+	customerService := customerService.New(repository)
+
+	customerService.Create(ctx, "Test", "Person", "Street 3", "testerman", []byte("password"))
 }
