@@ -1,0 +1,4 @@
+- [ ] Implement customer controller with chi
+- [ ] Implement OpenAPI v3 schema generation
+- [ ] Implement frontend client generation from OpenAPI schema
+- [ ] Implement user authentication
