@@ -1,4 +1,6 @@
 - [ ] Implement customer controller with chi
 - [ ] Implement OpenAPI v3 schema generation
 - [ ] Implement frontend client generation from OpenAPI schema
+- [ ] Add unit and end-to-end tests
+- [ ] Add GitHub workflows for client generation
 - [ ] Implement user authentication
