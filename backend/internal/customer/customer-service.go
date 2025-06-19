@@ -10,8 +10,8 @@ type CustomerService struct {
 	repository *repository.Queries
 }
 
-func NewCustomerService(repository *repository.Queries) CustomerService {
-	return CustomerService{repository}
+func NewCustomerService(repository *repository.Queries) *CustomerService {
+	return &CustomerService{repository}
 }
 
 func (c *CustomerService) Create(
