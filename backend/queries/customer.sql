@@ -1,6 +1,6 @@
--- name: AddCustomer :exec
+-- name: AddCustomer :one
 INSERT INTO customer (first_name, last_name, address, username, password)
-VALUES ($1, $2, $3, $4, $5);
+VALUES ($1, $2, $3, $4, $5) RETURNING id;
 
 -- name: RemoveCustomer :exec
 DELETE FROM customer

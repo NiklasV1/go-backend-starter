@@ -11,9 +11,9 @@ import (
 	"github.com/google/uuid"
 )
 
-const addCustomer = `-- name: AddCustomer :exec
+const addCustomer = `-- name: AddCustomer :one
 INSERT INTO customer (first_name, last_name, address, username, password)
-VALUES ($1, $2, $3, $4, $5)
+VALUES ($1, $2, $3, $4, $5) RETURNING id
 `
 
 type AddCustomerParams struct {
@@ -24,15 +24,17 @@ type AddCustomerParams struct {
 	Password  []byte `json:"password"`
 }
 
-func (q *Queries) AddCustomer(ctx context.Context, arg AddCustomerParams) error {
-	_, err := q.db.Exec(ctx, addCustomer,
+func (q *Queries) AddCustomer(ctx context.Context, arg AddCustomerParams) (uuid.UUID, error) {
+	row := q.db.QueryRow(ctx, addCustomer,
 		arg.FirstName,
 		arg.LastName,
 		arg.Address,
 		arg.Username,
 		arg.Password,
 	)
-	return err
+	var id uuid.UUID
+	err := row.Scan(&id)
+	return id, err
 }
 
 const getCustomer = `-- name: GetCustomer :one
