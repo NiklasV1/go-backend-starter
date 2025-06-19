@@ -1,6 +1,7 @@
 package customer
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -30,6 +31,9 @@ func (c *CustomerController) getCustomer(w http.ResponseWriter, r *http.Request)
 }
 
 func (c *CustomerController) createCustomer(w http.ResponseWriter, r *http.Request) {
-	c.customerService.Create(r.Context(), "Test", "Person", "Street 3", "testman", []byte("password"))
-
+	err := c.customerService.Create(r.Context(), "Test", "Person", "Street 3", "testman", []byte("password"))
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Unable to create customer", http.StatusInternalServerError)
+	}
 }

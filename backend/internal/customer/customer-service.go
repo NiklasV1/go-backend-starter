@@ -3,7 +3,6 @@ package customer
 import (
 	"context"
 	"example-backend/internal/repository"
-	"log"
 )
 
 type CustomerService struct {
@@ -21,7 +20,7 @@ func (c *CustomerService) Create(
 	address,
 	username string,
 	password []byte,
-) {
+) error {
 	err := c.repository.AddCustomer(ctx, repository.AddCustomerParams{
 		FirstName: firstName,
 		LastName:  lastName,
@@ -29,7 +28,6 @@ func (c *CustomerService) Create(
 		Username:  username,
 		Password:  password,
 	})
-	if err != nil {
-		log.Println(err)
-	}
+
+	return err
 }
